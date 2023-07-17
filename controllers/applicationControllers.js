@@ -7,7 +7,7 @@ const auth = require("../auth.js");
 //Duplication of product is not allowed
 module.exports.newApplication = (req, res) => {
         let newApplication = new Application({
-            firstName: req.body.fullName,
+            firstName: req.body.firstName,
             middleName: req.body.middleName,
             lastName: req.body.lastName,
             lrn: req.body.lrn,
