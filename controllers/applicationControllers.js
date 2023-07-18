@@ -17,6 +17,7 @@ module.exports.newApplication = (req, res) => {
             socialAccount: req.body.socialAccount,
             gradeLevelToEnroll: req.body.gradeLevelToEnroll,
             strandToEnroll: req.body.strandToEnroll,
+            medicalCondition: req.body.medicalCondition,
             presentSchool: req.body.presentSchool,
             studentStatus: req.body.studentStatus,
             parentFullName: req.body.parentFullName,

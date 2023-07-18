@@ -25,7 +25,7 @@ module.exports.createUser = (req, res) => {
             if (result.length > 0) {
                 return res.send("ERROR: User is already registered.");
             } else {
-                return Application.findOne({ email: req.body.email })
+                return User.findOne({ email: req.body.email })
                     .then(result => {
                         console.log(result);
                         if (result == null) {
@@ -36,7 +36,7 @@ module.exports.createUser = (req, res) => {
                                 })
                                 .catch(error => {
                                     console.log(error);
-                                    res.send(false);
+                                    return res.send(false);
                                 });
                         } else {
                             return res.send("ERROR: User is already existing!");
@@ -55,14 +55,14 @@ module.exports.loginUser = (req, res) => {
     return User.findOne({ email: req.body.email })
         .then(result => {
             if (result == null) {
-                return res.send("ERROR: The user is not registered.");
+                return res.send("2");
             } else {
                 const isPasswordCorrect = bcrypt.compareSync(req.body.password, result.password);
                 if (isPasswordCorrect) {
                     return res.send({ accessToken: auth.createAccessToken(result) });
 
                 } else {
-                    return res.send("ERROR: Password is incorrect.");
+                    return res.send("0");
                 }
             }
         })
@@ -181,16 +181,12 @@ module.exports.checkout = async(req, res) => {
 //view user info
 module.exports.retriveUser = (req, res) => {
     const userData = auth.decode(req.headers.authorization);
-    if (userData.isAdmin) {
-        return res.send("ERROR: You cannot access this page!");
-    } else {
         console.log(userData.id)
         return User.findById(userData.id).then(result => {
             result.password = "*****"
             result.orders = [];
             res.send(result)
         });
-    }
 }
 
 //User Orders

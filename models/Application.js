@@ -47,6 +47,9 @@ const applicationSchema = new mongoose.Schema({
         type: String,
         required: [true, "Please enter your PRESENT SCHOOL"]
     },
+    medicalCondition: {
+        type: String,
+    },
     studentStatus: {
         type: String,
         required: [true, "Please select your STATUS"]
