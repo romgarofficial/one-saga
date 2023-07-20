@@ -74,6 +74,20 @@ const applicationSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
+    requirements:[{
+        birthCert: {
+            type: Boolean,
+            default: false
+        },
+        reportCard:{
+            type: Boolean,
+            default: false
+        },
+        transcriptOfRecords:{
+            type: Boolean,
+            default: false
+        }
+    }],
     createdOn: {
         type: Date,
         default: new Date()

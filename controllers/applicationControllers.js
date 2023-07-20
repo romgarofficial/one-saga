@@ -50,6 +50,20 @@ module.exports.getAllApplications = (req, res) => {
     });
 }
 
+module.exports.getSpecificApplication = (req, res) => {
+    return Application.findById(req.params.applicationId).then(result => {
+            if (result) {
+                return res.send(result);
+            } else {
+                return res.send("0");
+            }
+        })
+        .catch(error => {
+            return res.send("2");
+        });
+}
+
+
 module.exports.getAllApplicationsAddmission = (req, res) => {
     return Application.find({ isDoneAdmission: false, isDoneAssessment: false, isDoneFinalVerification: false }).then(result => {
         // result.orders = [];

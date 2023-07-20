@@ -10,6 +10,9 @@ router.post("/enroll", applicationControllers.newApplication);
 //GET ALL APPLICATIONS
 router.get("/all", applicationControllers.getAllApplications);
 
+//GET SPECIFIC ADMISSION
+router.get("/admission/:applicationId", applicationControllers.getSpecificApplication);
+
 //GET DONE ADMISSION
 router.get("/admission", applicationControllers.getAllApplicationsAddmission);
 
