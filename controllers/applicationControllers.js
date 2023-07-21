@@ -63,6 +63,32 @@ module.exports.getSpecificApplication = (req, res) => {
         });
 }
 
+module.exports.getSpecificAcademicAssessment = (req, res) => {
+    return Application.findById(req.params.applicationId).then(result => {
+            if (result) {
+                return res.send(result);
+            } else {
+                return res.send("0");
+            }
+        })
+        .catch(error => {
+            return res.send("2");
+        });
+}
+
+module.exports.getSpecificFinancialAssessment = (req, res) => {
+    return Application.findById(req.params.applicationId).then(result => {
+            if (result) {
+                return res.send(result);
+            } else {
+                return res.send("0");
+            }
+        })
+        .catch(error => {
+            return res.send("2");
+        });
+}
+
 
 module.exports.getAllApplicationsAddmission = (req, res) => {
     return Application.find({ isDoneAdmission: false, isDoneAssessment: false, isDoneFinalVerification: false }).then(result => {
@@ -71,8 +97,15 @@ module.exports.getAllApplicationsAddmission = (req, res) => {
     });
 }
 
-module.exports.getAllApplicationsAssessment = (req, res) => {
-    return Application.find({ isDoneAdmission: true, isDoneAssessment: false, isDoneFinalVerification: false }).then(result => {
+module.exports.getAllApplicationsAssessment1 = (req, res) => {
+    return Application.find({ isDoneAdmission: true, isDoneAssessment1: false, isDoneAssessment2: false, isDoneFinalVerification: false }).then(result => {
+        // result.orders = [];
+        res.send(result)
+    });
+}
+
+module.exports.getAllApplicationsAssessment2 = (req, res) => {
+    return Application.find({ isDoneAdmission: true, isDoneAssessment1: true, isDoneAssessment2: false, isDoneFinalVerification: false }).then(result => {
         // result.orders = [];
         res.send(result)
     });
@@ -104,42 +137,70 @@ module.exports.updateForAdmission = (req, res) => {
                     Application.findByIdAndUpdate(req.params.applicationId, updateForAdmission, { new: true })
                         .then(result => {
                             console.log(result);
-                            res.send(result.fullName + " Application is done for admission.");
+                            return res.send("1");
                         })
                 } else if (result.isDoneAdmission === true) {
                     console.log(result);
-                    res.send("ERROR: The application is already done for admission.");
+                    return res.send("2");
+                }else{
+                    return res.send("0");
                 }
             })
             .catch(error => {
                 console.log(error);
-                res.send("ERROR: Something is wrong with the data provided.");
+                return res.send("0");
             });
 
 }
 
-module.exports.updateForAssessment = (req, res) => {
+module.exports.updateForAssessment1 = (req, res) => {
     let updateForAssessment = {
-        isDoneAssessment: true
+        isDoneAssessment1: true
 
     }
         return Application.findById(req.params.applicationId)
             .then(result => {
                 console.log(updateForAssessment);
-                if (result.isDoneAssessment != updateForAssessment.isDoneAssessment) {
+                if (result.isDoneAssessment1 != updateForAssessment.isDoneAssessment1) {
                     Application.findByIdAndUpdate(req.params.applicationId, updateForAssessment, { new: true })
                         .then(result => {
                             console.log(result);
-                            res.send(result.fullName + " Application is done for assessment.");
+                            res.send("1");
                         })
-                } else if (result.isDoneAdmission === true && result.isDoneAssessment === true) {
+                } else if (result.isDoneAssessment1 === true && updateForAssessment.isDoneAssessment1 === true) {
                     console.log(result);
-                    res.send("ERROR: The application is already done for assessment.");
+                    res.send("2");
                 }
             })
             .catch(error => {
                 console.log(error);
-                res.send("ERROR: Something is wrong with the data provided.");
+                return res.send("0");
+            });
+
+}
+
+module.exports.updateForAssessment2 = (req, res) => {
+    let updateForAssessment = {
+        isDoneAssessment2: true
+
+    }
+        return Application.findById(req.params.applicationId)
+            .then(result => {
+                console.log(updateForAssessment);
+                if (result.isDoneAssessment2 != updateForAssessment.isDoneAssessment2) {
+                    Application.findByIdAndUpdate(req.params.applicationId, updateForAssessment, { new: true })
+                        .then(result => {
+                            console.log(result);
+                            res.send("1");
+                        })
+                } else if (result.isDoneAssessment2 === true && updateForAssessment.isDoneAssessment2 === true) {
+                    console.log(result);
+                    res.send("2");
+                }
+            })
+            .catch(error => {
+                console.log(error);
+                return res.send("0");
             });
 
 }

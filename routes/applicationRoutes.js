@@ -12,12 +12,16 @@ router.get("/all", applicationControllers.getAllApplications);
 
 //GET SPECIFIC ADMISSION
 router.get("/admission/:applicationId", applicationControllers.getSpecificApplication);
+router.get("/academic-assessment/:applicationId", applicationControllers.getSpecificAcademicAssessment);
+router.get("/financial-assessment/:applicationId", applicationControllers.getSpecificFinancialAssessment);
 
 //GET DONE ADMISSION
 router.get("/admission", applicationControllers.getAllApplicationsAddmission);
 
 //GET DONE ASSESSMENT
-router.get("/assessment", applicationControllers.getAllApplicationsAssessment);
+router.get("/academic-assessment", applicationControllers.getAllApplicationsAssessment1);
+router.get("/financial-assessment", applicationControllers.getAllApplicationsAssessment2);
+
 
 //GET DONE FINAL VERIFICATION
 router.get("/verification", applicationControllers.getAllApplicationsFinalVerification);
@@ -29,7 +33,8 @@ router.get("/verified", applicationControllers.getAllEnrolledStudents);
 router.put("/admission/:applicationId", applicationControllers.updateForAdmission);
 
 //GET DONE FINAL VERIFICATION
-router.put("/assessment/:applicationId", applicationControllers.updateForAssessment);
+router.put("/academic-assessment/:applicationId", applicationControllers.updateForAssessment1);
+router.put("/financial-assessment/:applicationId", applicationControllers.updateForAssessment2);
 
 //GET DONE FINAL VERIFICATION
 router.put("/verification/:applicationId", applicationControllers.updateForFinalVerification);

@@ -66,11 +66,19 @@ const applicationSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
-    isDoneAssessment: {
+    isDoneAssessment1: {
+        type: Boolean,
+        default: false
+    },
+    isDoneAssessment2: {
         type: Boolean,
         default: false
     },
     isDoneFinalVerification: {
+        type: Boolean,
+        default: false
+    },
+    isArchived: {
         type: Boolean,
         default: false
     },
