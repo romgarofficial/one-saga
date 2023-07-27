@@ -10,6 +10,7 @@ module.exports.newApplication = (req, res) => {
             firstName: req.body.firstName,
             middleName: req.body.middleName,
             lastName: req.body.lastName,
+            gender: req.body.gender,
             lrn: req.body.lrn,
             birthDate: req.body.birthDate,
             address: req.body.address,

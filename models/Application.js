@@ -12,10 +12,13 @@ const applicationSchema = new mongoose.Schema({
         type: String,
         required: [true, "Please enter your LAST NAME."]
     },
+    gender: {
+        type: String,
+        required: [true, "Please select a GENDER."]
+    },
     lrn: {
         type: String
-    }
-    ,
+    },
     email: {
         type: String,
         default: ""
