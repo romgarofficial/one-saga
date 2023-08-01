@@ -14,16 +14,17 @@ router.get("/all", applicationControllers.getAllApplications);
 router.get("/admission/:applicationId", applicationControllers.getSpecificApplication);
 router.get("/academic-assessment/:applicationId", applicationControllers.getSpecificAcademicAssessment);
 router.get("/financial-assessment/:applicationId", applicationControllers.getSpecificFinancialAssessment);
+router.get("/final-verification/:applicationId", applicationControllers.getSpecificFinalVerification);
 
-//GET DONE ADMISSION
+//GET ALL ADMISSION
 router.get("/admission", applicationControllers.getAllApplicationsAddmission);
 
-//GET DONE ASSESSMENT
+//GET ALL ASSESSMENT
 router.get("/academic-assessment", applicationControllers.getAllApplicationsAssessment1);
 router.get("/financial-assessment", applicationControllers.getAllApplicationsAssessment2);
 
 
-//GET DONE FINAL VERIFICATION
+//GET ALL FINAL VERIFICATION
 router.get("/verification", applicationControllers.getAllApplicationsFinalVerification);
 
 //GET DONE FINAL VERIFICATION
@@ -38,5 +39,8 @@ router.put("/financial-assessment/:applicationId", applicationControllers.update
 
 //GET DONE FINAL VERIFICATION
 router.put("/verification/:applicationId", applicationControllers.updateForFinalVerification);
+
+//PUT FILES
+router.put("/final-verification/:applicationId", applicationControllers.updateFilesVerification);
 
 module.exports = router;

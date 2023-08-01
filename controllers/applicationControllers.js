@@ -90,6 +90,19 @@ module.exports.getSpecificFinancialAssessment = (req, res) => {
         });
 }
 
+module.exports.getSpecificFinalVerification = (req, res) => {
+    return Application.findById(req.params.applicationId).then(result => {
+            if (result) {
+                return res.send(result);
+            } else {
+                return res.send("0");
+            }
+        })
+        .catch(error => {
+            return res.send("2");
+        });
+}
+
 
 module.exports.getAllApplicationsAddmission = (req, res) => {
     return Application.find({ isDoneAdmission: false, isDoneAssessment: false, isDoneFinalVerification: false }).then(result => {
@@ -113,7 +126,7 @@ module.exports.getAllApplicationsAssessment2 = (req, res) => {
 }
 
 module.exports.getAllApplicationsFinalVerification = (req, res) => {
-    return Application.find({ isDoneAdmission: true, isDoneAssessment: true, isDoneFinalVerification: false }).then(result => {
+    return Application.find({ isDoneAdmission: true, isDoneAssessment1: true, isDoneAssessment2: true, isDoneFinalVerification: false }).then(result => {
         // result.orders = [];
         res.send(result)
     });
@@ -218,18 +231,42 @@ module.exports.updateForFinalVerification = (req, res) => {
                     Application.findByIdAndUpdate(req.params.applicationId, updateForFinalVerification, { new: true })
                         .then(result => {
                             console.log(result);
-                            res.send(result.fullName + " Application is done for final verification.");
+                            return res.send("1");
                         })
                 } else if (result.isDoneAdmission === true && result.isDoneAssessment === true && result.isDoneFinalVerification === true) {
                     console.log(result);
-                    res.send("ERROR: The application is already done for final verification.");
+                    return res.send("2");
                 }
             })
             .catch(error => {
                 console.log(error);
-                res.send("ERROR: Something is wrong with the data provided.");
+                return res.send("2");
             });
 
 }
+
+module.exports.updateFilesVerification = (req, res) => {
+    const { birthCert, reportCard, transcriptOfRecords } = req.body.requirements;
+    Application.findByIdAndUpdate(
+        req.params.applicationId,
+        {
+            "requirements.birthCert": birthCert,
+            "requirements.reportCard": reportCard,
+            "requirements.transcriptOfRecords": transcriptOfRecords
+        },
+        { new: true }
+    )
+        .then((updatedApplication) => {
+            if (updatedApplication) {
+                return res.send("1");
+            } else {
+                return res.send("2");
+            }
+        })
+        .catch((error) => {
+            return res.send("0");
+        });
+}
+
 
 

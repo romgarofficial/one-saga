@@ -85,6 +85,14 @@ const applicationSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
+    isActive: {
+        type: Boolean,
+        default: true
+    },
+    isOfficiallyEnrolled: {
+        type: Boolean,
+        default: false
+    },
     requirements:[{
         birthCert: {
             type: Boolean,
@@ -99,6 +107,10 @@ const applicationSchema = new mongoose.Schema({
             default: false
         }
     }],
+    enrolledInAcadYear: {
+        type: [String],
+        default: []
+    },
     createdOn: {
         type: Date,
         default: new Date()
