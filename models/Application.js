@@ -93,7 +93,7 @@ const applicationSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
-    requirements:[{
+    requirements:{
         birthCert: {
             type: Boolean,
             default: false
@@ -106,7 +106,7 @@ const applicationSchema = new mongoose.Schema({
             type: Boolean,
             default: false
         }
-    }],
+    },
     enrolledInAcadYear: {
         type: [String],
         default: []

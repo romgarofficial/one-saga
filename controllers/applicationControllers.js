@@ -247,26 +247,30 @@ module.exports.updateForFinalVerification = (req, res) => {
 
 module.exports.updateFilesVerification = (req, res) => {
     const { birthCert, reportCard, transcriptOfRecords } = req.body.requirements;
+
+    // Update the Application document
     Application.findByIdAndUpdate(
         req.params.applicationId,
         {
-            "requirements.birthCert": birthCert,
-            "requirements.reportCard": reportCard,
-            "requirements.transcriptOfRecords": transcriptOfRecords
+            $set: {
+                "requirements.birthCert": birthCert,
+                "requirements.reportCard": reportCard,
+                "requirements.transcriptOfRecords": transcriptOfRecords
+            }
         },
         { new: true }
     )
-        .then((updatedApplication) => {
-            if (updatedApplication) {
-                return res.send("1");
-            } else {
-                return res.send("2");
-            }
-        })
-        .catch((error) => {
-            return res.send("0");
-        });
-}
+    .then((updatedApplication) => {
+        if (updatedApplication) {
+            return res.status(200).json({ success: true, message: "APPLICATION UPDATED!" });
+        } else {
+            return res.status(404).json({ success: false, message: "Application not found" });
+        }
+    })
+    .catch((error) => {
+        return res.status(500).json({ success: false, message: "Failed to update application" });
+    });
+};
 
 
 

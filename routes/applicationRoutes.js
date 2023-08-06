@@ -33,7 +33,7 @@ router.get("/verified", applicationControllers.getAllEnrolledStudents);
 //GET DONE FINAL VERIFICATION
 router.put("/admission/:applicationId", applicationControllers.updateForAdmission);
 
-//GET DONE FINAL VERIFICATION
+//UPDATE APROVALS
 router.put("/academic-assessment/:applicationId", applicationControllers.updateForAssessment1);
 router.put("/financial-assessment/:applicationId", applicationControllers.updateForAssessment2);
 
