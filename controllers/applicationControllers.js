@@ -262,13 +262,13 @@ module.exports.updateFilesVerification = (req, res) => {
     )
     .then((updatedApplication) => {
         if (updatedApplication) {
-            return res.status(200).json({ success: true, message: "APPLICATION UPDATED!" });
+            return res.send("1")
         } else {
-            return res.status(404).json({ success: false, message: "Application not found" });
+            return res.send("2")
         }
     })
     .catch((error) => {
-        return res.status(500).json({ success: false, message: "Failed to update application" });
+        return res.send("0")
     });
 };
 
