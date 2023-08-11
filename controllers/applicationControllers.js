@@ -1,11 +1,21 @@
 const Application = require("../models/Application.js");
 const auth = require("../auth.js");
+const nodemailer = require('nodemailer');
+
+function mail(enrol_email){
+            
+    // Create a transporter using Gmail SMTP with App Password
+    
+}
 
 
 
 //Adding products -> Admin Only
 //Duplication of product is not allowed
 module.exports.newApplication = (req, res) => {
+
+    const sender_email = "romgarofficial@gmail.com";
+
         let newApplication = new Application({
             firstName: req.body.firstName,
             middleName: req.body.middleName,
@@ -31,6 +41,33 @@ module.exports.newApplication = (req, res) => {
                 if (result == null) {
                     newApplication.save()
                         .then(application => {
+                            
+                            const transporter = nodemailer.createTransport({
+                                service: 'gmail',
+                                auth: {
+                                    user: sender_email,           
+                                    pass: 'tsektlzcscalvqho',   
+                                },
+                                });
+                            
+                                // Email details
+                                const mailOptions = {
+                                from: sender_email,
+                                to: newApplication.email,
+                                subject: 'SAGA Online Enrolment',  
+                                text: `${newApplication.firstName} ${newApplication.lastName} you are now enrolled online! Please visit our scholl to finish the enrolment process. Thank you!`,
+                                };
+                            
+                                // Send the email
+                                transporter.sendMail(mailOptions, (error, info) => {
+                                if (error) {
+                                    console.log('Error:', error);
+                                } else {
+                                    console.log('Email sent:', info.response);
+                                }
+                                });
+
+
                             console.log(application);
                             return res.send("1");
                         })
