@@ -1,12 +1,7 @@
 const Application = require("../models/Application.js");
 const auth = require("../auth.js");
 const nodemailer = require('nodemailer');
-
-function mail(enrol_email){
-            
-    // Create a transporter using Gmail SMTP with App Password
-    
-}
+const hbs = require('nodemailer-express-handlebars');
 
 
 
@@ -49,13 +44,18 @@ module.exports.newApplication = (req, res) => {
                                     pass: 'tsektlzcscalvqho',   
                                 },
                                 });
+
+                                transporter.use("compile", hbs({
+                                    viewEngine: "nodemailer-express-handlebars",
+                                    viewPath: "views"
+                                }))
                             
                                 // Email details
                                 const mailOptions = {
                                 from: sender_email,
                                 to: newApplication.email,
                                 subject: 'SAGA Online Enrolment',  
-                                text: `${newApplication.firstName} ${newApplication.lastName} you are now enrolled online! Please visit our school to finish the enrolment process. Thank you!`,
+                                template: "email"
                                 };
                             
                                 // Send the email
