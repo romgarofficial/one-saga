@@ -21,7 +21,7 @@ const applicationSchema = new mongoose.Schema({
     },
     email: {
         type: String,
-        default: ""
+        required: [true, "Please enter your EMAIL."]
     },
     birthDate: {
         type: String,
