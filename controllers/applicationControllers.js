@@ -55,7 +55,7 @@ module.exports.newApplication = (req, res) => {
                                 from: sender_email,
                                 to: newApplication.email,
                                 subject: 'SAGA Online Enrolment',  
-                                text: `${newApplication.firstName} ${newApplication.lastName} you are now enrolled online! Please visit our scholl to finish the enrolment process. Thank you!`,
+                                text: `${newApplication.firstName} ${newApplication.lastName} you are now enrolled online! Please visit our school to finish the enrolment process. Thank you!`,
                                 };
                             
                                 // Send the email
